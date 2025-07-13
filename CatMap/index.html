@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Segurança</title>
+    <style>
+        /* Faz o mapa ocupar a tela inteira */
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        // Função para inicializar o mapa
+        function initMap() {
+            // Centro do mapa (exemplo: São Paulo, SP)
+            const center = { lat: -23.5505, lng: -46.6333 };
+            
+            // Criar o mapa
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15, // Nível de zoom (15 é bom para ver os círculos)
+                center: center,
+                mapTypeId: "roadmap", // Tipo de mapa
+            });
+
+            // Lista de locais para os círculos (substitua pelas suas coordenadas)
+            const locations = [
+                { lat: -23.5505, lng: -46.6333 }, // Exemplo: centro de São Paulo
+                { lat: -23.5510, lng: -46.6340 }, // Ponto próximo
+                { lat: -23.5490, lng: -46.6320 }, // Outro ponto próximo
+            ];
+
+            // Adicionar círculos ao mapa
+            locations.forEach((location) => {
+                new google.maps.Circle({
+                    strokeColor: "#FF0000", // Borda vermelha
+                    strokeOpacity: 0.8, // Opacidade da borda
+                    strokeWeight: 2, // Espessura da borda
+                    fillColor: "#FF0000", // Preenchimento vermelho
+                    fillOpacity: 0.35, // Preenchimento translúcido
+                    map: map,
+                    center: location,
+                    radius: 45, // Raio de 45 metros
+                });
+            });
+        }
+    </script>
+    <!-- Carregar a API do Google Maps -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNdrWg4IPlrgB9XAYkvrY94xqFVNV7pc&callback=initMap">
+    </script>
+</body>
+</html>
